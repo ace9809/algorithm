@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table id="table2" style = "text-align: center">
+
+</table>
+</body>
+<script type="text/javascript">
+    var number = prompt("홀 수 입력하세요", "number");
+    if(number % 2 !== 0) {
+        alert(number);
+        drawTable(number);
+    }
+    function drawTable(number) {
+        var table = document.getElementById("table2");
+        console.log(table);
+        for(var i = 0; i< number; i++) {
+            var tr = document.createElement("tr");
+                    table.appendChild(tr);
+            for(var j = 0; j < number; j++) {
+                var td = document.createElement("td");
+                tr.appendChild(td);
+            }
+        }
+        table.setAttribute("border", "1");
+        table.setAttribute("width", "800");
+        table.setAttribute("height", "600")
+        mabangjin(number);
+        return table;
+    }
+
+    function mabangjin(number) {
+        var getTable = document.getElementsByTagName("tr");
+        var i = 0;
+        var j = Math.floor(number/2);
+        for(var value = 1; value <= number*number; value++) {
+            getTable[i].childNodes[j].innerHTML = value;
+            if(value % number === 0) {
+                if(value !== number*number) {
+                    i++;
+                }
+            }
+            else {
+                i--;
+                j++;
+                if (i < 0) {
+                    i = number - 1;
+                }
+                if (j > (number - 1)) {
+                    j = 0;
+                }
+
+            }
+            getTable[i].childNodes[j].innerHTML = value;
+            }
+            total(getTable, number);
+    }
+    function total(getTable, number) {
+        var xsum;
+        var ysum;
+        var zsum;
+        for(var i = 0; i< number; i++) {
+            xsum = 0;
+            ysum = 0;
+            zsum = 0;
+         for(var j = 0; j < number; j++) {
+             xsum += Number(getTable[i].childNodes[j].innerHTML);
+             ysum += Number(getTable[j].childNodes[i].innerHTML);
+             zsum += Number(getTable[(i+1)-1].childNodes[(j+1)-1].innerHTML);
+         }
+        }
+        console.log("가로길이" + xsum);
+        console.log("세로길이" + ysum);
+        console.log("대각선길이" + zsum);
+    }
+</script>
+</html>
