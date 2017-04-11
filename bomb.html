@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    var number1 = prompt("입력", "입력");
+    twoArray(number1);
+
+
+    function twoArray(number1) {
+        var myArray = new Array(number1);
+        for(i=0;i<number1;i++)
+        for(var i = 0; i < number1; i++) {
+            var ace =random(number1);
+            console.log(ace);
+            myArray[i] = new Array(number1);
+            for(var j = 0; j < number1; j++) {
+                    if(j === ace) {
+                        myArray[i][j] = '*'
+                    }
+                    else
+                        myArray[i][j] = 0;
+                        console.log("안돼");
+
+            }
+        }
+        findbomb(myArray);
+    }
+
+    function random(number1) {
+            var randomStar = Math.floor(Math.random() * Number(number1));
+            return randomStar;
+    }
+
+
+    function findbomb(myArray) {
+        for(var i = 0; i < myArray.length; i++) {
+            for(var j = 0; j< myArray[i].length; j++) {
+                if(myArray[i][j] == '*') {
+                    for(var row=-1;row<=1;row++){
+                        for(var column=-1;column<=1;column++){
+                            if((i == 0 && row == -1) || (j == 0 && column == -1))
+                                continue;
+                            if(((i == myArray.length - 1 && row == 1) || (j == myArray.length - 1 && column == 1)))
+                                continue;
+                            if (myArray[i+row][j+column] != '*' && typeof(myArray[i+row][j+column]) === 'number'){
+                                console.log("찾음");
+                                    myArray[i + row][j + column] += 1;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        console.log(myArray.toString());
+    }
+</script>
+
+</body>
+</html>

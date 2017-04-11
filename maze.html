@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+    var row = prompt("가로", "가로");
+    var column = prompt("세로","세로");
+    var x = new Array(100);
+    var y = new Array(100);
+    var z = new Array(100);
+    var cnt = 0;
+    var array = new Array(column);
+    for(var i = 0; i < column; i++) {
+        array[i] = new Array(row);
+        var line = prompt("미로를 만들어주세요");
+        for (var j = 0; j < line.length; j++) {
+            var subString = line.substr(j, 1);
+            array[i][j] = Number(subString);
+        }
+    }
+    console.log(array);
+    findMiro(0,0,row,column);
+
+    function queue(vertical,horizontal, _z) {
+        console.log("queue다!");
+        x[cnt] = vertical;
+        y[cnt] = horizontal;
+        z[cnt] = _z;
+        cnt++;
+    }
+    function findMiro(vertical, horizontal,row,column) {
+        var short_distance= 0;
+        queue(vertical, horizontal, 1);
+        while (short_distance < cnt && (x[short_distance] !== row - 1 || y[short_distance] !== column - 1)) {
+            array[y[short_distance]][x[short_distance]] = 0;
+            if (y[short_distance] > 0 && array[y[short_distance] - 1][x[short_distance]] !== 0) {
+                console.log("위로");
+                queue(x[short_distance], y[short_distance] - 1, l[short_distance] + 1);
+            }
+            if (y[short_distance] < column - 1 && array[y[short_distance] + 1][x[short_distance]] !== 0) {
+                console.log("아래로");
+                queue(x[short_distance], y[short_distance] + 1, l[short_distance] + 1);
+            }
+            if (x[short_distance] > 0 && array[y[short_distance]][x[short_distance] - 1] !== 0) {
+                console.log("왼쪽 갈 수 있음");
+                queue(x[short_distance] - 1, y[short_distance], l[short_distance] + 1);
+            }
+            if (x[short_distance] < row - 1 && array[y[short_distance]][x[short_distance] + 1] !== 0) {
+                console.log("오른쪽 갈 수 있음");
+                queue(x[short_distance] + 1, y[short_distance], l[short_distance] + 1);
+            }
+            short_distance++;
+
+        }
+        if (short_distance < cnt)
+            console.log(l[short_distance]);
+    }
+
+</script>
+</body>
+</html>
