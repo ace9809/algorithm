@@ -38,19 +38,19 @@
             array[y[short_distance]][x[short_distance]] = 0;
             if (y[short_distance] > 0 && array[y[short_distance] - 1][x[short_distance]] !== 0) {
                 console.log("위로");
-                queue(x[short_distance], y[short_distance] - 1, l[short_distance] + 1);
+                queue(x[short_distance], y[short_distance] - 1, z[short_distance] + 1);
             }
             if (y[short_distance] < column - 1 && array[y[short_distance] + 1][x[short_distance]] !== 0) {
                 console.log("아래로");
-                queue(x[short_distance], y[short_distance] + 1, l[short_distance] + 1);
+                queue(x[short_distance], y[short_distance] + 1, z[short_distance] + 1);
             }
             if (x[short_distance] > 0 && array[y[short_distance]][x[short_distance] - 1] !== 0) {
                 console.log("왼쪽 갈 수 있음");
-                queue(x[short_distance] - 1, y[short_distance], l[short_distance] + 1);
+                queue(x[short_distance] - 1, y[short_distance], z[short_distance] + 1);
             }
             if (x[short_distance] < row - 1 && array[y[short_distance]][x[short_distance] + 1] !== 0) {
                 console.log("오른쪽 갈 수 있음");
-                queue(x[short_distance] + 1, y[short_distance], l[short_distance] + 1);
+                queue(x[short_distance] + 1, y[short_distance], z[short_distance] + 1);
             }
             short_distance++;
 
