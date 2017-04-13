@@ -7,35 +7,36 @@
 <body>
 <script type="text/javascript">
     var number1 = prompt("입력", "입력");
-    twoArray(number1);
-
-
+    twoArray(parseInt(number1));
     function twoArray(number1) {
         var myArray = new Array(number1);
-        for(i=0;i<number1;i++)
-        for(var i = 0; i < number1; i++) {
-            var ace =random(number1);
-            console.log(ace);
-            myArray[i] = new Array(number1);
-            for(var j = 0; j < number1; j++) {
-                    if(j === ace) {
-                        myArray[i][j] = '*'
-                    }
-                    else
-                        myArray[i][j] = 0;
-                        console.log("안돼");
-
+            for (var i = 0; i < number1; i++) {
+                myArray[i] = new Array(number1);
             }
-        }
-        findbomb(myArray);
-    }
+            for(var j = 0; j < number1; j++) {
+                var ace = random(number1);
+
+                myArray[ace.randomStar][ace.randomStar2] = '*'
+            }
+            for (var i = 0; i <number1; i++) {
+                for (var j = 0; j < number1; j++) {
+                    if (myArray[i][j] != '*') {
+                        myArray[i][j] = 0;
+                        }
+                    }
+                }
+                findbomb(myArray);
+                console.log(myArray);
+            }
 
     function random(number1) {
-            var randomStar = Math.floor(Math.random() * Number(number1));
-            return randomStar;
+        var randomStar = Math.floor(Math.random() * number1);
+        var randomStar2 = Math.floor(Math.random() * number1);
+        return {
+            randomStar : randomStar,
+            randomStar2 : randomStar2
+        }
     }
-
-
     function findbomb(myArray) {
         for(var i = 0; i < myArray.length; i++) {
             for(var j = 0; j< myArray[i].length; j++) {
@@ -47,15 +48,20 @@
                             if(((i == myArray.length - 1 && row == 1) || (j == myArray.length - 1 && column == 1)))
                                 continue;
                             if (myArray[i+row][j+column] != '*' && typeof(myArray[i+row][j+column]) === 'number'){
-                                console.log("찾음");
-                                    myArray[i + row][j + column] += 1;
+//                                console.log("찾음");
+                                myArray[i + row][j + column] += 1;
                             }
                         }
                     }
                 }
             }
         }
-        console.log(myArray.toString());
+        for(var i=0; i < number1; i++) {
+            for(var j=0; j < number1; j++) {
+                document.write(myArray[i][j] + "&nbsp");
+            }
+            document.write("<br>");
+        }
     }
 </script>
 
