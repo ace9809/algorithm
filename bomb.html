@@ -15,8 +15,14 @@
             }
             for(var j = 0; j < number1; j++) {
                 var ace = random(number1);
-
-                myArray[ace.randomStar][ace.randomStar2] = '*'
+                if(myArray[ace.randomStar][ace.randomStar2] !== '*') {
+                    myArray[ace.randomStar][ace.randomStar2] = '*'
+                }
+                else {
+                    console.log(myArray);
+                    if(myArray[ace.randomStar+1][ace.randomStar+1] !== '*')
+                    myArray[ace.randomStar+1][ace.randomStar+1] = '*'
+                }
             }
             for (var i = 0; i <number1; i++) {
                 for (var j = 0; j < number1; j++) {
@@ -34,7 +40,7 @@
         var randomStar2 = Math.floor(Math.random() * number1);
         return {
             randomStar : randomStar,
-            randomStar2 : randomStar2
+            randomStar2 : randomStar2,
         }
     }
     function findbomb(myArray) {
@@ -48,7 +54,6 @@
                             if(((i == myArray.length - 1 && row == 1) || (j == myArray.length - 1 && column == 1)))
                                 continue;
                             if (myArray[i+row][j+column] != '*' && typeof(myArray[i+row][j+column]) === 'number'){
-//                                console.log("찾음");
                                 myArray[i + row][j + column] += 1;
                             }
                         }

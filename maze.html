@@ -5,24 +5,47 @@
     <title>Title</title>
 </head>
 <body>
+<textarea id="inputbox" cols="20" rows="10"></textarea>
+<div><button id="preview">Preview</button></div>
 <script type="text/javascript">
-    var row = prompt("가로", "가로");
-    var column = prompt("세로","세로");
+    var row,column;
     var x = new Array(100);
     var y = new Array(100);
     var z = new Array(100);
     var cnt = 0;
-    var array = new Array(column);
-    for(var i = 0; i < column; i++) {
-        array[i] = new Array(row);
-        var line = prompt("미로를 만들어주세요");
-        for (var j = 0; j < line.length; j++) {
-            var subString = line.substr(j, 1);
-            array[i][j] = Number(subString);
+    document.getElementById("preview").onclick=processText;
+
+    function processText() {
+        var txtBox = document.getElementById("inputbox");
+        var lines = txtBox.value.split("\n");
+        var resultString  = "<p>";
+
+
+        for(var k = 0; k < 1; k++) {
+            for(var z = 0; z < lines[k].length; z++) {
+                var sub = lines[k].substr(z,1);
+                if(z === 0 ) {
+                    column = sub;
+                }
+                else
+                    row = sub;
+            }
         }
+
+        var array = new Array(parseInt(row));
+        for (var i = 1; i < lines.length; i++) {
+            array[i-1] = new Array(parseInt(column));
+            for (var j = 0; j < lines[i].length; j++) {
+                var subString = lines[i].substr(j, 1);
+                array[i-1][j] = parseInt(subString);
+            }
+            console.log(array[i]);
+            resultString = lines[i] + "<br />";
+        }
+        console.log(column, row);
+        findMiro(0,0,parseInt(row),parseInt(column),array);
     }
-    console.log(array);
-    findMiro(0,0,row,column);
+
 
     function queue(vertical,horizontal, _z) {
         console.log("queue다!");
@@ -31,10 +54,11 @@
         z[cnt] = _z;
         cnt++;
     }
-    function findMiro(vertical, horizontal,row,column) {
+    function findMiro(vertical, horizontal,row,column,array) {
         var short_distance= 0;
         queue(vertical, horizontal, 1);
         while (short_distance < cnt && (x[short_distance] !== row - 1 || y[short_distance] !== column - 1)) {
+            console.log(short_distance);
             array[y[short_distance]][x[short_distance]] = 0;
             if (y[short_distance] > 0 && array[y[short_distance] - 1][x[short_distance]] !== 0) {
                 console.log("위로");

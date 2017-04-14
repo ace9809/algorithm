@@ -20,7 +20,7 @@
         console.log(table);
         for(var i = 0; i< number; i++) {
             var tr = document.createElement("tr");
-                    table.appendChild(tr);
+            table.appendChild(tr);
             for(var j = 0; j < number; j++) {
                 var td = document.createElement("td");
                 tr.appendChild(td);
@@ -40,38 +40,26 @@
         for(var value = 1; value <= number*number; value++) {
             getTable[i].childNodes[j].innerHTML = value;
             if(value % number === 0) {
-                if(value !== number*number) {
-                    i++;
-                }
+                if(value !== number*number) i++;
             }
             else {
                 i--;
                 j++;
-                if (i < 0) {
-                    i = number - 1;
-                }
-                if (j > (number - 1)) {
-                    j = 0;
-                }
-
+                if (i < 0) i = number - 1;
+                if (j > (number - 1)) j = 0;
             }
             getTable[i].childNodes[j].innerHTML = value;
-            }
-            total(getTable, number);
+        }
+        total(getTable, number);
     }
     function total(getTable, number) {
-        var xsum;
-        var ysum;
-        var zsum;
-        for(var i = 0; i< number; i++) {
-            xsum = 0;
-            ysum = 0;
-            zsum = 0;
-         for(var j = 0; j < number; j++) {
-             xsum += Number(getTable[i].childNodes[j].innerHTML);
-             ysum += Number(getTable[j].childNodes[i].innerHTML);
-             zsum += Number(getTable[(i+1)-1].childNodes[(j+1)-1].innerHTML);
-         }
+        var xsum = 0;
+        var ysum = 0;
+        var zsum = 0;
+        for (var i = 0; i < number; i++) {
+                xsum += Number(getTable[0].childNodes[i].innerHTML);
+                ysum += Number(getTable[i].childNodes[0].innerHTML);
+                zsum += Number(getTable[i].childNodes[i].innerHTML);
         }
         console.log("가로길이" + xsum);
         console.log("세로길이" + ysum);
