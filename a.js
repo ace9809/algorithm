@@ -1,7 +1,2 @@
-function a() {
-  console.log('testa');
-}
+console.log('ace');
 
-function b() {
-  console.log('testb');
-}
